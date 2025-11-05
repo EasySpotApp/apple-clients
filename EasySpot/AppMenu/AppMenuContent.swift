@@ -10,41 +10,21 @@ import SwiftUI
 
 struct AppMenuContent: View {
     @State private var showGreeting = true
-    
-    @ObservedObject var manager = BluetoothManager()
+    @EnvironmentObject var bluetoothManager: BluetoothManager
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             AppMenuHeader()
-                
-            Text("Your Devices")
-                .fontWeight(.medium)
-                .foregroundStyle(.secondary)
-                .font(.system(size: 12))
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 14)
-                
+            
             ScrollView() {
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(
-                        manager.deviceStore.pairedDevices,
-                        id: \.id
-                    ) { device in
-                        AppMenuDevice(
-                            deviceName: device.name ?? "Unknown",
-                            action: {}
-                        )
-                    }
-                }
-                Divider()
-                VStack(alignment: .leading, spacing: 0) {
-                    ForEach(manager.deviceStore.otherDevices, id: \.id) { device in
-                        AppMenuDevice(
-                            deviceName: device.name ?? "Unknown",
-                            action: {}
-                        )
-                    }
-                }
+                AppMenuDeviceList(
+                    title: "Your Devices",
+                    devices: bluetoothManager.deviceStore.pairedDevices
+                )
+                AppMenuDeviceList(
+                    title: "Other Devices",
+                    devices: bluetoothManager.deviceStore.otherDevices
+                )
             }
         }
         .frame(maxWidth: 300, alignment: .leading)

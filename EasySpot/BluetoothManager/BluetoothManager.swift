@@ -3,14 +3,15 @@ import AsyncBluetooth
 import CoreBluetooth
 import SwiftUI
 
+@MainActor
 class BluetoothManager: ObservableObject {
     @Published var status: ManagerStatus = .waiting
     @Published var deviceErrors: [DeviceErrorInfo] = []
     @Published var deviceStore = DeviceStore()
-
+    
     private var central = CentralManager()
     private var scanTask: Task<Void, Never>?
-
+    
     init() {
         print("init")
         startScanning()

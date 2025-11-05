@@ -2,8 +2,10 @@
 import AppKit
 import SwiftUI
 
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
     var statusBarItem: NSStatusItem?
+    var bluetoothManager: BluetoothManager = BluetoothManager()
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusBarItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -21,13 +23,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         let menu = NSMenu()
         
-        menu.addItem(swiftUItoNSItem(AppMenuContent()))
-
+        menu
+            .addItem(
+                swiftUItoNSItem(
+                    AppMenuContent().environmentObject(bluetoothManager)
+                )
+            )
+        
         menu.addItem(NSMenuItem.separator())
-
+        
         menu.addItem(NSMenuItem(title: "Settings...", action: #selector(NSApplication.terminate(_:)), keyEquivalent: ""))
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
-
+        
         // TODO: Check if the offsets look good on notchless macs
         menu.popUp(positioning: nil, at: NSPoint(x: -2, y: button.bounds.height + 5), in: button)
     }
@@ -36,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let menuItem = NSMenuItem()
         let hostingView = NSHostingView(rootView: view)
         
-        let targetSize = hostingView.fittingSize
+//        let targetSize = hostingView.fittingSize
         hostingView.frame = NSRect(
             x: 0,
             y: 0,
@@ -44,9 +51,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             height: 300
         )
         menuItem.view = hostingView
-
+        
         return menuItem
     }
-        
+    
 }
 #endif

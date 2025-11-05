@@ -9,21 +9,21 @@ import Foundation
 import CoreBluetooth
 import AsyncBluetooth
 
+@MainActor
 class DeviceStore: ObservableObject {
     @Published private(set) var pairedDevices: [Device] = []
     @Published private(set) var otherDevices: [Device] = []
     private var deviceMap: [UUID: Device] = [:]
     
-    @MainActor
     func update(device: Device) {
         print("Adding device \(device.id) \(device.name ?? "no name") \(device.peripheral.state)")
         deviceMap[device.id] = device
         
-        pairedDevices = deviceMap.values
+        pairedDevices = Array(deviceMap.values)
             .filter { $0.peripheral.state == .connected }
             .sorted { $0.rssi > $1.rssi }
         
-        otherDevices = deviceMap.values
+        otherDevices = Array(deviceMap.values)
             .filter { $0.peripheral.state != .connected }
             .sorted { $0.rssi > $1.rssi }
     }
@@ -65,7 +65,7 @@ class DeviceStore: ObservableObject {
             rssi: scan.rssi.intValue
         )
         
-        await update(device: device)
+        update(device: device)
     }
     
     private func mapCharacteristics(_ peripheral: Peripheral) -> EasySpotCharacteristics {

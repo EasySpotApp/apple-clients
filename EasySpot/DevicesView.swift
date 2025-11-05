@@ -9,8 +9,6 @@ import Foundation
 import SwiftUI
 
 struct DevicesView: View {
-    @StateObject var bluetoothManager: BluetoothManager
-    
     var body: some View {
         VStack {
 //            Button(action: {
