@@ -11,6 +11,8 @@ import SwiftUI
 struct AppMenuContent: View {
     @State private var showGreeting = true
     
+    @ObservedObject var manager = BluetoothManager()
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             AppMenuHeader()
@@ -24,22 +26,24 @@ struct AppMenuContent: View {
                 
             ScrollView() {
                 VStack(alignment: .leading, spacing: 0) {
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
-                    AppMenuDevice(deviceName: "Test", action: {})
+                    ForEach(
+                        manager.deviceStore.pairedDevices,
+                        id: \.id
+                    ) { device in
+                        AppMenuDevice(
+                            deviceName: device.name ?? "Unknown",
+                            action: {}
+                        )
+                    }
+                }
+                Divider()
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach(manager.deviceStore.otherDevices, id: \.id) { device in
+                        AppMenuDevice(
+                            deviceName: device.name ?? "Unknown",
+                            action: {}
+                        )
+                    }
                 }
             }
         }

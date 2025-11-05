@@ -7,12 +7,12 @@
 
 import Foundation
 import CoreBluetooth
+import AsyncBluetooth
 
 struct Device: Identifiable, Equatable {
     let id: UUID
     let name: String?
-    let peripheral: CBPeripheral
-    var status: DeviceStatus
+    let peripheral: Peripheral
     var characteristics: EasySpotCharacteristics
     var rssi: Int
     
@@ -22,10 +22,6 @@ struct Device: Identifiable, Equatable {
 }
 
 struct EasySpotCharacteristics {
-    var status: CBCharacteristic? = .none
+    var status: Characteristic? = .none
 }
 
-enum DeviceStatus {
-    case visible
-    case paired
-}

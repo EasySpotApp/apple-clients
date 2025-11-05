@@ -8,9 +8,9 @@
 import Foundation
 
 enum ManagerStatus: Equatable {
-    case ready
     case scanning
-    case bluetoothUnavailable(reason: BluetoothUnavailableReason)
+    case waiting
+//    case bluetoothUnavailable(reason: BluetoothUnavailableReason)
 }
 
 enum BluetoothUnavailableReason: Equatable {

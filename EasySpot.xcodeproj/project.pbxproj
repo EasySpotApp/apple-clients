@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		822FCCFB2EB3A03600BA35C5 /* AsyncBluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 822FCCFA2EB3A03600BA35C5 /* AsyncBluetooth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		82230CC82EABA53E00E58872 /* EasySpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasySpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				822FCCFB2EB3A03600BA35C5 /* AsyncBluetooth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = EasySpot;
 			packageProductDependencies = (
+				822FCCFA2EB3A03600BA35C5 /* AsyncBluetooth */,
 			);
 			productName = EasySpot;
 			productReference = 82230CC82EABA53E00E58872 /* EasySpot.app */;
@@ -108,6 +114,7 @@
 			mainGroup = 82230CBF2EABA53E00E58872;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				822FCCF92EB3A03600BA35C5 /* XCRemoteSwiftPackageReference "AsyncBluetooth" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 82230CC92EABA53E00E58872 /* Products */;
@@ -362,6 +369,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		822FCCF92EB3A03600BA35C5 /* XCRemoteSwiftPackageReference "AsyncBluetooth" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/manolofdez/AsyncBluetooth.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		822FCCFA2EB3A03600BA35C5 /* AsyncBluetooth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 822FCCF92EB3A03600BA35C5 /* XCRemoteSwiftPackageReference "AsyncBluetooth" */;
+			productName = AsyncBluetooth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 82230CC02EABA53E00E58872 /* Project object */;
 }
